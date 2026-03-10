@@ -109,3 +109,196 @@ O modelo **Random Forest Regressor** apresentou o melhor desempenho geral, com o
 
 O modelo de Random Forest treinado, devido ao seu desempenho superior, foi exportado e salvo no formato `joblib` como `modelo_random_forest_crop.pkl`. Isso permite que o modelo seja facilmente carregado e utilizado em uma aplicação real para fazer previsões de rendimento de culturas.
 
+---
+
+# Estimativa de Custos AWS para Hospedagem de API com Machine Learning
+
+## 1. Objetivo
+
+O objetivo é realizar uma estimativa de custos utilizando a **AWS Pricing Calculator** para hospedar uma máquina virtual Linux responsável por executar uma API que receberá dados de sensores e executará rotinas de Machine Learning.
+
+A simulação considera as seguintes especificações:
+
+- 2 CPUs
+- 1 Gigabit de memória
+- Até 5 Gigabit de rede
+- 50 GB de armazenamento (HD)
+- Modelo de pagamento **On-Demand (100%)**
+
+A estimativa foi realizada comparando duas regiões da AWS:
+
+- **Norte da Virgínia (EUA)**
+- **São Paulo (Brasil)**
+
+---
+
+# 2. Escolha do Serviço
+
+Para a hospedagem da API foi escolhido o serviço **Amazon EC2 (Elastic Compute Cloud)**.
+
+O EC2 permite criar máquinas virtuais na nuvem com diferentes configurações de CPU, memória, rede e armazenamento, sendo amplamente utilizado para hospedar aplicações web, APIs e serviços de processamento.
+
+Neste projeto, o EC2 será responsável por:
+
+- Executar a API que recebe dados dos sensores
+- Processar informações utilizando Machine Learning
+- Armazenar temporariamente os dados recebidos
+- Disponibilizar o serviço de forma contínua
+
+A escolha do EC2 foi feita por ser um serviço flexível e escalável, permitindo configurar exatamente os recursos necessários para o funcionamento da aplicação.
+
+<img width="886" height="488" alt="image" src="https://github.com/user-attachments/assets/672c575f-e19a-4d93-b961-4df154aa80fb" />
+
+---
+
+# 3. Configuração da Instância EC2
+
+Após selecionar o serviço Amazon EC2 na AWS Pricing Calculator, foi realizada a configuração da máquina virtual que será responsável por hospedar a API e executar os processos de Machine Learning.
+
+A configuração foi definida de forma a atender aos requisitos propostos inicialmente, mantendo o menor custo possível.
+
+## 3.1 Região
+
+Foram avaliadas duas regiões da AWS para comparação de custos:
+
+- **US East (N. Virginia)**
+- **South America (São Paulo)**
+
+A comparação entre regiões é importante pois o custo de infraestrutura da AWS pode variar dependendo da localização do datacenter.
+
+---
+
+## 3.2 Sistema Operacional
+
+Foi selecionado o sistema operacional:
+
+- **Linux**
+
+O Linux foi escolhido por ser amplamente utilizado em servidores de aplicações e APIs, além de não possuir custos adicionais de licenciamento, diferentemente de sistemas operacionais comerciais.
+
+<img width="886" height="382" alt="image" src="https://github.com/user-attachments/assets/8d64647d-edd1-4961-8c1a-21a7e4a28fa1" />
+
+---
+
+## 3.3 Tipo de Instância
+
+A instância escolhida foi:
+
+- t3.micro
+
+Características principais da instância:
+
+- 2 vCPU
+- 1 Gigabit de memória
+- Performance de rede de até 5 Gigabit
+- Modelo de computação burstável
+
+Esse tipo de instância pertence à família **General Purpose**, sendo indicado para aplicações leves como APIs, microsserviços e pequenos processamentos de dados.
+
+<img width="886" height="391" alt="image" src="https://github.com/user-attachments/assets/14d50e9a-f3fe-4339-a254-a2ebc5c50a98" />
+
+---
+
+## 3.4 Modelo de Pagamento
+
+O modelo de pagamento selecionado foi:
+
+**On-Demand (100% de utilização mensal)**
+
+Nesse modelo, o pagamento ocorre apenas pelo tempo de utilização da instância, sem necessidade de reserva antecipada ou contratos de longo prazo.
+
+Esse modelo é ideal para ambientes de desenvolvimento ou aplicações que precisam permanecer disponíveis continuamente.
+
+<img width="886" height="390" alt="image" src="https://github.com/user-attachments/assets/8a8a983a-7d9a-4c52-9f60-e34b60676e6a" />
+
+---
+
+## 3.5 Armazenamento
+
+Para o armazenamento foi configurado:
+
+- **50 GB de armazenamento EBS**
+
+O Amazon EBS (Elastic Block Store) é utilizado para fornecer armazenamento persistente para instâncias EC2.
+
+Esse espaço será utilizado para armazenar:
+
+- arquivos da aplicação
+- logs do sistema
+- dados temporários processados pela API
+
+<img width="886" height="261" alt="image" src="https://github.com/user-attachments/assets/657d6c28-1161-4cdc-901f-cebe6aab7a63" />
+
+---
+
+# 4. Estimativa de Custos
+
+Após realizar a configuração da instância EC2 na AWS Pricing Calculator, foi gerada uma estimativa de custos para duas regiões distintas da AWS.
+
+A simulação foi realizada utilizando exatamente a mesma configuração de máquina para ambas as regiões, permitindo uma comparação direta entre os custos.
+
+## 4.1 Resultado da Simulação
+
+| Região AWS | Custo Mensal | Custo Anual |
+|-------------|-------------|-------------|
+| US East (N. Virginia) | USD 8.34 | USD 100.08 |
+| South America (São Paulo) | USD 13.70 | USD 164.40 |
+
+Observa-se que a região **US East (N. Virginia)** apresenta um custo significativamente menor em comparação com a região **South America (São Paulo)**.
+
+Essa diferença ocorre devido a fatores como:
+
+- maior quantidade de datacenters nos Estados Unidos
+- maior escala de infraestrutura
+- custos operacionais menores
+
+
+<img width="886" height="372" alt="image" src="https://github.com/user-attachments/assets/c6fe66fb-f621-468a-9a55-23b7ddb3c58a" />
+
+---
+
+# 5. Conclusão
+
+A partir da simulação realizada na AWS Pricing Calculator foi possível estimar os custos de execução de uma máquina virtual Linux utilizando o serviço Amazon EC2 para hospedar uma API responsável por receber dados de sensores e executar rotinas de Machine Learning.
+
+A configuração utilizada atendeu aos requisitos da atividade, considerando:
+
+- 2 vCPU
+- 1 Gigabit de memória
+- até 5 Gigabit de rede
+- 50 GB de armazenamento
+- modelo de pagamento On-Demand
+
+Durante a análise comparativa entre as regiões da AWS, observou-se que a região **US East (N. Virginia)** apresentou custo significativamente menor quando comparada à região **South America (São Paulo)**.
+
+| Região AWS | Custo Mensal | Custo Anual |
+|-------------|-------------|-------------|
+| US East (N. Virginia) | USD 8.34 | USD 100.08 |
+| South America (São Paulo) | USD 13.70 | USD 164.40 |
+
+Sob uma perspectiva exclusivamente financeira, a escolha mais econômica seria a região **US East (N. Virginia)**.
+
+Entretanto, o cenário proposto também considera dois fatores importantes:
+
+- necessidade de **acesso rápido aos dados dos sensores**
+- **restrições legais para armazenamento de dados no exterior**
+
+Diante dessas condições, a escolha mais adequada para a hospedagem da aplicação seria a região **South America (São Paulo)**.
+
+A utilização de uma região localizada no Brasil proporciona:
+
+- **menor latência de rede**, melhorando o tempo de resposta na coleta de dados dos sensores
+- **conformidade com requisitos legais e regulatórios**, garantindo que os dados permaneçam armazenados no país
+- maior segurança quanto à **localização e governança dos dados**
+
+Dessa forma, embora a região **US East (N. Virginia)** apresente menor custo, a região **South America (São Paulo)** foi escolhida por atender melhor aos requisitos operacionais e legais do projeto.
+
+---
+
+## Orçamento Completo
+
+O relatório completo gerado pela AWS Pricing Calculator pode ser consultado no documento abaixo:
+
+📄 [Orçamento AWS](./Orçamento%20FIAP%20Fase%205%20-%20Calculadora%20de%20Preços%20da%20AWS.pdf)
+
+
